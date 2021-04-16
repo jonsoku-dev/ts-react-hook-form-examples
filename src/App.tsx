@@ -1,23 +1,26 @@
-import './App.css';
+/*
+ * Copyright (c) 2021 LINE Corporation. All rights reserved.
+ * LINE Corporation PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
 
 import React from 'react';
 
-import logo from './logo.svg';
+import Basic from './react-hook-form-example/basic';
+import BasicRef from './react-hook-form-example/basic-ref';
+import BasicValidation from './react-hook-form-example/basic-validation';
+import Register from './react-hook-form-example/register';
 
-function App() {
+export interface AppProps {}
+
+const App: React.FC<AppProps> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/*<Basic />*/}
+      {/*<Register />*/}
+      {/*<BasicValidation />*/}
+      <BasicRef />
     </div>
   );
-}
+};
 
 export default App;
