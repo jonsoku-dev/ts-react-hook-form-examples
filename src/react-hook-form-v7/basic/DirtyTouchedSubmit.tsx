@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 // Dirty 는 한번 이상 입력이 된 필드를 뜻하는 것이다.
 // Dirty 와 Touched 의 차이점이란?
-// Dirty:  전류 제어입력에 대한 더티 상태. (?) 사용자가 입력한 순간 활성화 -> validation 에 적합
+// Dirty:  전류 제어입력에 대한 더티 상태. (?) 사용자가 입력한 순간 활성화 -> validate 에 적합
 // Touched: 현재 제어 입력을위한 터치 상태. (?) 사용자가 입력을 마치고 다른 곳으로 포커싱되었을때 활성화 -> 그럼 얘는 뭐에쓰지?
 
 let renderCount = 0;

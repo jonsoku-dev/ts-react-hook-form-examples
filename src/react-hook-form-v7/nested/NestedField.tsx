@@ -1,5 +1,5 @@
 import React from 'react';
-import { Path, useForm, UseFormRegister } from 'react-hook-form';
+import { useForm, UseFormRegister } from 'react-hook-form';
 
 // https://codesandbox.io/s/react-hook-form-adapting-existing-form-ts-uzfxm
 

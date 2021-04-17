@@ -195,3 +195,8 @@ insert_final_newline = true
   ]
 }
 ```
+
+## componentWillMount error
+```shell
+npx react-codemod rename-unsafe-lifecycles
+```

@@ -1,11 +1,22 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import BasicValidation from '../react-hook-form-v7/validation/BasicValidation';
-import BasicValidationWithError from '../react-hook-form-v7/validation/BasicValidationWithError';
-import CustomValidation from '../react-hook-form-v7/validation/CustomValidation';
-import GetValuesCompareFields from '../react-hook-form-v7/validation/GetValuesCompareFields';
-import ValidationSchema from '../react-hook-form-v7/validation/ValidationSchema';
+import Loading from '../Loading';
+
+const components = [
+  { name: 'BasicValidation' },
+  { name: 'BasicValidationWithError' },
+  { name: 'CustomValidation' },
+  { name: 'GetValuesCompareFields' },
+  { name: 'ValidationSchema' },
+].map((route) => ({
+  ...route,
+  component: Loadable({
+    loader: () => import(`../react-hook-form-v7/validate/${route.name}`),
+    loading: Loading,
+  }),
+}));
 
 export interface ValidateProps {}
 
@@ -16,39 +27,19 @@ const Validate: React.FC<ValidateProps> = () => {
     <Router>
       <div>
         <ul>
-          <li>
-            <Link to={`${match.url}/basic`}>BasicValidation</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/basic-with-error`}>BasicValidationWithError</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/custom-validation`}>CustomValidation</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/validation-schema`}>ValidationSchema</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/get-values-compare-field`}>GetValuesCompareField</Link>
-          </li>
+          {components.map((com) => (
+            <li key={com.name}>
+              <Link to={`${match.url}/${com.name.toLocaleLowerCase()}`}>{com.name}</Link>
+            </li>
+          ))}
         </ul>
 
         <Switch>
-          <Route path={`${match.url}/basic`}>
-            <BasicValidation />
-          </Route>
-          <Route path={`${match.url}/basic-with-error`}>
-            <BasicValidationWithError />
-          </Route>
-          <Route path={`${match.url}/validation-schema`}>
-            <ValidationSchema />
-          </Route>
-          <Route path={`${match.url}/get-values-compare-field`}>
-            <GetValuesCompareFields />
-          </Route>
-          <Route path={`${match.url}/custom-validation`}>
-            <CustomValidation />
-          </Route>
+          {components.map((com) => (
+            <Route key={com.name} path={`${match.url}/${com.name.toLocaleLowerCase()}`}>
+              <com.component />
+            </Route>
+          ))}
         </Switch>
       </div>
     </Router>

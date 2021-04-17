@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useCallback } from 'react';
 import { useFieldArray } from 'react-hook-form';
-import { NestedValue } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 /**
@@ -38,7 +36,7 @@ function FieldArrayAdvanced() {
     defaultValues,
   });
 
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'child',
   });

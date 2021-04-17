@@ -1,7 +1,16 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import WithReactSelect from '../react-hook-form-v7/controller/WithReactSelect';
+import Loading from '../Loading';
+
+const components = [{ name: 'WithReactSelect' }].map((route) => ({
+  ...route,
+  component: Loadable({
+    loader: () => import(`../react-hook-form-v7/controller/${route.name}`),
+    loading: Loading,
+  }),
+}));
 
 export interface ControllerProps {}
 
@@ -12,15 +21,19 @@ const Controller: React.FC<ControllerProps> = () => {
     <Router>
       <div>
         <ul>
-          <li>
-            <Link to={`${match.url}/with-react-select`}>WithReactSelect</Link>
-          </li>
+          {components.map((com) => (
+            <li key={com.name}>
+              <Link to={`${match.url}/${com.name.toLocaleLowerCase()}`}>{com.name}</Link>
+            </li>
+          ))}
         </ul>
 
         <Switch>
-          <Route path={`${match.url}/with-react-select`}>
-            <WithReactSelect />
-          </Route>
+          {components.map((com) => (
+            <Route key={com.name} path={`${match.url}/${com.name.toLocaleLowerCase()}`}>
+              <com.component />
+            </Route>
+          ))}
         </Switch>
       </div>
     </Router>
