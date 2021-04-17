@@ -76,7 +76,10 @@ function FormSection2({ register }: FormSectionType) {
   );
 }
 
+let renderCount = 0;
+
 export default function NestedField() {
+  renderCount++;
   const {
     register,
     formState: { errors },
@@ -98,10 +101,13 @@ export default function NestedField() {
   console.log(errors);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormSection1 register={register} />
-      <FormSection2 register={register} />
-      <input type="submit" />
-    </form>
+    <div>
+      <div>render: {renderCount}</div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormSection1 register={register} />
+        <FormSection2 register={register} />
+        <input type="submit" />
+      </form>
+    </div>
   );
 }

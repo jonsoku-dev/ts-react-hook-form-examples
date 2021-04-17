@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/src/react-hook-form-v7/DoubleNestedWithValidation/DepthOne.tsx">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/react-hook-form-v7/DoubleNestedWithValidation/DepthTwo.tsx">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/src/react-hook-form-v7/GetValuesCompareFields.tsx">
           <value>
             <Attribute>

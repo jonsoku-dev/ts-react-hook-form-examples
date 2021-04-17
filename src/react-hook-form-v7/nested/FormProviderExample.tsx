@@ -6,11 +6,15 @@ type FormValues = {
   nested: string;
 };
 
+let renderCount = 0;
+
 export default function FormProviderExample() {
+  renderCount++;
   const methods = useForm<FormValues>();
   const { register, handleSubmit } = methods;
   return (
     <FormProvider {...methods}>
+      <div>render: {renderCount}</div>
       <form onSubmit={handleSubmit((data) => console.log(data))}>
         <label htmlFor="form-provider-test">Test</label>
         <input id="form-provider-test" {...register('test', { required: true })} />

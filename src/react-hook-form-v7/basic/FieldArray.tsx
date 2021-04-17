@@ -6,7 +6,10 @@ function createArrayWithNumbers(length: any) {
   return Array.from({ length }, (_, i) => i);
 }
 
+let renderCount = 0;
+
 export default function FieldArray() {
+  renderCount++;
   const {
     register,
     handleSubmit,
@@ -21,6 +24,7 @@ export default function FieldArray() {
 
   return (
     <div className="App">
+      <div>render: {renderCount}</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {createArrayWithNumbers(size).map((number) => {
           return (

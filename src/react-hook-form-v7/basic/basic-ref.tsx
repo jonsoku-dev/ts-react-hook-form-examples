@@ -33,7 +33,10 @@ const Select = forwardRef<HTMLSelectElement, { label: string } & ReturnType<UseF
   ),
 );
 
+let renderCount = 0;
+
 const BasicRef = () => {
+  renderCount++;
   const { register, handleSubmit } = useForm<IFormValues>();
 
   const onSubmit = (data: IFormValues) => {
@@ -41,11 +44,14 @@ const BasicRef = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input label="First Name" register={register} required />
-      <Select label="Age" {...register('Age')} />
-      <input type="submit" />
-    </form>
+    <div>
+      <div>render: {renderCount}</div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input label="First Name" register={register} required />
+        <Select label="Age" {...register('Age')} />
+        <input type="submit" />
+      </form>
+    </div>
   );
 };
 

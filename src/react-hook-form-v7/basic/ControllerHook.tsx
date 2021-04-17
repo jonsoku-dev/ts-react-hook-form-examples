@@ -14,7 +14,10 @@ function Input(props: any) {
   );
 }
 
-export default function HookController() {
+let renderCount = 0;
+
+export default function ControllerHook() {
+  renderCount++;
   const { handleSubmit, control } = useForm({
     defaultValues: {
       FirstName: '',
@@ -24,9 +27,12 @@ export default function HookController() {
   const onSubmit = (data: any) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input control={control} name="FirstName" rules={{ required: true }} />
-      <input type="submit" />
-    </form>
+    <div>
+      <div>render: {renderCount}</div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input control={control} name="FirstName" rules={{ required: true }} />
+        <input type="submit" />
+      </form>
+    </div>
   );
 }

@@ -13,7 +13,10 @@ const validationSchema = object().shape({
     .required(),
 });
 
+let renderCount = 0;
+
 function FieldArrayMinLength() {
+  renderCount++;
   const {
     control,
     register,
@@ -61,27 +64,30 @@ function FieldArrayMinLength() {
   const onSubmit = (data: any, second: any) => console.log(data, second);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h1>Yup Validation - Field Array</h1>
-      {fields.map((question, questionIndex) => (
-        <div key={question.id}>
-          <input {...register(`questions[${questionIndex}].text`)} />
-          <button
-            type="button"
-            onClick={() => {
-              remove(questionIndex);
-              trigger();
-            }}
-          >
-            Remove question {question.id}
-          </button>
-        </div>
-      ))}
-      <button type="button" onClick={appendQuestion}>
-        Add question
-      </button>
-      <input type="submit" />
-    </form>
+    <>
+      <div>render: {renderCount}</div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>Yup Validation - Field Array</h1>
+        {fields.map((question, questionIndex) => (
+          <div key={question.id}>
+            <input {...register(`questions[${questionIndex}].text`)} />
+            <button
+              type="button"
+              onClick={() => {
+                remove(questionIndex);
+                trigger();
+              }}
+            >
+              Remove question {question.id}
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={appendQuestion}>
+          Add question
+        </button>
+        <input type="submit" />
+      </form>
+    </>
   );
 }
 
