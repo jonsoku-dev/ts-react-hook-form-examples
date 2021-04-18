@@ -9,7 +9,7 @@ export interface DepthOneProps {}
 const DepthOne: React.VFC<DepthOneProps> = () => {
   const formMethods = useFormContext<DoubleNestedWithValidationFormValues>();
   const {
-    clearErrors,
+    trigger,
     formState: { errors },
   } = formMethods;
 
@@ -29,18 +29,15 @@ const DepthOne: React.VFC<DepthOneProps> = () => {
         },
       ],
     });
-
-    clearErrors('depthOne');
-  }, [append, clearErrors]);
+    trigger();
+  }, [append, trigger]);
 
   const onClickRemove = useCallback(
     (removeIdx: number) => {
       remove(removeIdx);
-
-      // clearErrors(`depthOne.${removeIdx}` as 'depthOne.0');
-      clearErrors();
+      trigger();
     },
-    [remove, clearErrors],
+    [remove, trigger],
   );
 
   return (

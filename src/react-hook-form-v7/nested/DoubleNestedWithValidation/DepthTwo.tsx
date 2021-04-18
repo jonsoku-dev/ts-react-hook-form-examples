@@ -10,7 +10,7 @@ export interface DepthTwoProps {
 const DepthTwo: React.VFC<DepthTwoProps> = (props) => {
   const formMethods = useFormContext<DoubleNestedWithValidationFormValues>();
   const {
-    clearErrors,
+    trigger,
     formState: { errors },
   } = formMethods;
 
@@ -24,21 +24,16 @@ const DepthTwo: React.VFC<DepthTwoProps> = (props) => {
       language: '',
       text: '',
     });
-
-    clearErrors(`depthOne.${props.idx}.depthTwo` as 'depthOne.0.depthTwo');
-  }, [append, clearErrors, props.idx]);
+    trigger();
+  }, [append, trigger, props.idx]);
 
   const onClickRemove = useCallback(
     (removeIdx: number) => {
       remove(removeIdx);
-
-      // clearErrors(`depthOne.${props.idx}.depthTwo.${removeIdx}` as 'depthOne.0.depthTwo.0');
-      clearErrors();
+      trigger();
     },
-    [remove, clearErrors, props.idx],
+    [remove, trigger, props.idx],
   );
-
-  console.log(errors);
 
   return (
     <div>
